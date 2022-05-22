@@ -4,24 +4,22 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Player {
+public class Team {
     @Id
     private String id;
     private String name;
-    private String birthDate;
-    private int height;
-    private String foot;
+    private String leagueId;
     private String countryId;
-    private String currentTeamId;
+    private String logoName;
 
-    public Player(String id, String name, String birthDate, int height, String foot, String countryId, String currentTeamId) {
+    public Team(String id, String name,
+                String leagueId, String countryId,
+                String logoName) {
         this.id = id;
         this.name = name;
-        this.birthDate = birthDate;
-        this.height = height;
-        this.foot = foot;
         this.countryId = countryId;
-        this.currentTeamId = currentTeamId;
+        this.leagueId = leagueId;
+        this.logoName = logoName;
     }
 
     public String getId() {
@@ -40,28 +38,12 @@ public class Player {
         this.name = name;
     }
 
-    public String getBirthDate() {
-        return birthDate;
+    public String getLeagueId() {
+        return leagueId;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public String getFoot() {
-        return foot;
-    }
-
-    public void setFoot(String foot) {
-        this.foot = foot;
+    public void setLeagueId(String leagueId) {
+        this.leagueId = leagueId;
     }
 
     public String getCountryId() {
@@ -72,24 +54,22 @@ public class Player {
         this.countryId = countryId;
     }
 
-    public String getCurrentTeamId() {
-        return currentTeamId;
+    public String getLogoName() {
+        return logoName;
     }
 
-    public void setCurrentTeamId(String currentTeamId) {
-        this.currentTeamId = currentTeamId;
+    public void setLogoName(String logoName) {
+        this.logoName = logoName;
     }
 
     @Override
     public String toString() {
-        return "Player{" +
+        return "Team{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", birthDate='" + birthDate + '\'' +
-                ", height=" + height +
-                ", foot='" + foot + '\'' +
+                ", leagueId='" + leagueId + '\'' +
                 ", countryId='" + countryId + '\'' +
-                ", currentTeamId='" + currentTeamId + '\'' +
+                ", logoName='" + logoName + '\'' +
                 '}';
     }
 }

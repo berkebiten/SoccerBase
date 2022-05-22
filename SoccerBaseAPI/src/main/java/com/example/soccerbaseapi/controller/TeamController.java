@@ -1,35 +1,35 @@
 package com.example.soccerbaseapi.controller;
 
-import com.example.soccerbaseapi.model.Player;
-import com.example.soccerbaseapi.service.PlayerService;
+import com.example.soccerbaseapi.model.Team;
+import com.example.soccerbaseapi.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/player")
+@RequestMapping(path = "/team")
 public class
-PlayerController {
+TeamController {
 
     @Autowired
-    private PlayerService playerService;
+    private TeamService teamService;
 
-    public PlayerController(com.example.soccerbaseapi.service.PlayerService playerService) {
-        this.playerService = playerService;
+    public TeamController(TeamService teamService) {
+        this.teamService = teamService;
     }
     @GetMapping(value = "/getAll")
-    public List<Player> getAllVote() {
-        return playerService.getAll();
+    public List<Team> getAllVote() {
+        return teamService.getAll();
     }
 
     @PostMapping(value = "/insert")
-    public Player save(@RequestBody Player player) {
-        return playerService.save(player);
+    public Team save(@RequestBody Team team) {
+        return teamService.save(team);
     }
 
     @DeleteMapping(value = "/delete")
     public boolean delete(@RequestParam String id) {
-        return playerService.delete(id);
+        return teamService.delete(id);
     }
 }

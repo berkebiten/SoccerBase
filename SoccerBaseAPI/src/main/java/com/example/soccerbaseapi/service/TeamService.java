@@ -1,13 +1,13 @@
 package com.example.soccerbaseapi.service;
 
-import com.example.soccerbaseapi.model.Player;
+import com.example.soccerbaseapi.model.Team;
 
 import java.util.List;
 
-public interface PlayerService {
-    List<Player> getAll();
+public interface TeamService {
+    List<Team> getAll();
 
-    Player save(Player player);
+    Team save(Team team);
 
     boolean delete(String id);
 }

@@ -3,15 +3,32 @@ package com.example.soccerbaseapi.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Date;
+
 @Document
 public class Player {
     @Id
     private String id;
     private String name;
+    private String birthDate;
+    private int height;
+    private String foot;
+    private String countryId;
+    private String currentTeamId;
 
-    public Player(String id, String name) {
+    public Player(String id, String name, String birthDate, int height, String foot, String countryId, String currentTeamId) {
         this.id = id;
         this.name = name;
+        this.birthDate = birthDate;
+        this.height = height;
+        this.foot = foot;
+        this.countryId = countryId;
+        this.currentTeamId = currentTeamId;
     }
 
     public String getId() {
@@ -30,11 +47,64 @@ public class Player {
         this.name = name;
     }
 
+    public int getAge() {
+        int age = 0;
+        LocalDate curDate = LocalDate.now();
+        LocalDate birth = LocalDate.parse(birthDate);
+        age = Period.between(birth, curDate).getYears();
+        return age;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public String getFoot() {
+        return foot;
+    }
+
+    public void setFoot(String foot) {
+        this.foot = foot;
+    }
+
+    public String getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(String countryId) {
+        this.countryId = countryId;
+    }
+
+    public String getCurrentTeamId() {
+        return currentTeamId;
+    }
+
+    public void setCurrentTeamId(String currentTeamId) {
+        this.currentTeamId = currentTeamId;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", height=" + height +
+                ", foot='" + foot + '\'' +
+                ", countryId='" + countryId + '\'' +
+                ", currentTeamId='" + currentTeamId + '\'' +
                 '}';
     }
 }
