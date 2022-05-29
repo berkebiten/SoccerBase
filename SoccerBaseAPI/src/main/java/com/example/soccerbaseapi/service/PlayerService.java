@@ -13,7 +13,7 @@ public interface PlayerService {
     List<Player> getByTeamId(String teamId);
     List<Player> getByCountryId(String teamId);
     List<Player> getByFilters(String name, Integer minAge, Integer maxAge,
-                              String foot, String countryIds, String teamIds, String ids);
+                              String foot, String countryIds, String teamIds);
     Player save(Player player);
 
     boolean delete(String id);

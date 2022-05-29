@@ -1,9 +1,8 @@
 package com.example.soccerbaseapi.controller;
 
 import com.example.soccerbaseapi.model.Player;
+import com.example.soccerbaseapi.requestModel.PlayerRequest;
 import com.example.soccerbaseapi.service.PlayerService;
-import com.mongodb.lang.Nullable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,8 +13,7 @@ import java.util.Optional;
 public class
 PlayerController {
 
-    @Autowired
-    private PlayerService playerService;
+    private final PlayerService playerService;
 
     public PlayerController(com.example.soccerbaseapi.service.PlayerService playerService) {
         this.playerService = playerService;
@@ -40,19 +38,24 @@ PlayerController {
     public List<Player> getByTeamId(@RequestParam String teamId) {
         return playerService.getByTeamId(teamId);
     }
+
     @GetMapping(value = "/getByCountryId")
     public List<Player> getByCountryId(@RequestParam String countryId) {
         return playerService.getByCountryId(countryId);
     }
+
     @GetMapping(value = "/getByFilters")
-    public List<Player> getByFilters(@RequestParam @Nullable String name,
-                                       @RequestParam @Nullable Integer minAge,
-                                       @RequestParam @Nullable Integer maxAge,
-                                       @RequestParam @Nullable String foot,
-                                       @RequestParam @Nullable String countryIds,
-                                       @RequestParam @Nullable String teamIds) {
-        return playerService.getByFilters(name,minAge,maxAge,foot,countryIds,countryIds,teamIds);
+    public List<Player> getByFilters(@RequestBody PlayerRequest playerRequest) {
+        return playerService.getByFilters(
+                playerRequest.getName(),
+                playerRequest.getMinAge()-1,
+                playerRequest.getMaxAge()+1,
+                playerRequest.getFoot(),
+                playerRequest.getCountryIds() == null ? "" : playerRequest.getCountryIds(),
+                playerRequest.getTeamIds() == null ? "" : playerRequest.getTeamIds()
+        );
     }
+
     @PostMapping(value = "/insert")
     public Player save(@RequestBody Player player) {
         return playerService.save(player);
